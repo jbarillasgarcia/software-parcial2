@@ -1,2 +1,3 @@
-# software-parcial2
-Segundo examen parcial del curso Ingeniería de Software
+# Ingeniería de Software - Examen Parcial 2
+
+Segundo examen parcial del curso Ingeniería de Software.
