@@ -1,0 +1,9 @@
+server:
+    port: 8086
+    
+spring:
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.185.4.65:3306/jbarilla_ingsoftware
+        username: jbarilla_estudia
+        password: 2Ui!OssHDQGv
