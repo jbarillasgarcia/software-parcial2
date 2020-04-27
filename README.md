@@ -16,10 +16,10 @@ Segundo examen parcial del curso Ingeniería de Software.
 ### CU04 - Exportar estudiantes a archivo XLSX en FTP
 - http://localhost:9097/export/toftp?name=%pepito%
 
-### CU05 - Asignar estudiante de forma manual
+### CU05 - Asignar estudiantes de forma manual
 - http://localhost:9097/assignments/assign?student=%juan%&course=math%
 
-### CU06 - Desasignar estudiante de forma manual
+### CU06 - Desasignar estudiantes de forma manual
 - http://localhost:9097/assignments/deallocate?student=%juan%&course=math%
 
 ### CU07 - Asignar automáticamente cada 5 minutos
