@@ -32,4 +32,4 @@ Segundo examen parcial del curso Ingeniería de Software.
 - http://localhost:9097/export/dashboard/dash20200427
 
 ### CU10 - Eliminar registros por lote
-- http://localhost:9097/purge/students/field?value=%garc%
+- http://localhost:9097/purge/students/field?value=%garc%&batchsize=100
