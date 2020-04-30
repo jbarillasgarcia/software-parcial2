@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,6 +26,10 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ *
+ * @author rodrigo
+ */
 @Entity
 @Table(name = "t2_student")
 @NamedQueries({
@@ -46,7 +55,7 @@ public class T2Student implements Serializable {
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 50)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
@@ -56,26 +65,26 @@ public class T2Student implements Serializable {
     private Date birthdate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 15)
+    @Size(min = 1, max = 50)
     @Column(name = "student_id")
     private String studentId;
-    @Size(max = 15)
+    @Size(max = 30)
     @Column(name = "phone1")
     private String phone1;
-    @Size(max = 15)
+    @Size(max = 30)
     @Column(name = "phone2")
     private String phone2;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 100)
     @Column(name = "address1")
     private String address1;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 100)
     @Column(name = "address2")
     private String address2;
-    @JsonIgnore
+     @JsonIgnore
     @JoinTable(name = "t2_student_rel_course", joinColumns = {
         @JoinColumn(name = "id_student", referencedColumnName = "id_student")}, inverseJoinColumns = {
         @JoinColumn(name = "id_course", referencedColumnName = "id_course")})
@@ -212,5 +221,5 @@ public class T2Student implements Serializable {
     public String toString() {
         return "gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student[ idStudent=" + idStudent + " ]";
     }
-
+    
 }
