@@ -56,6 +56,11 @@ public class StudentControler {
     @PutMapping("/update/{id}")
     public T2Student update(@PathVariable(required = true) int id, @RequestBody(required = true) T2Student studentToUpdate) {
         return this.studentService.updateStudent(studentToUpdate);
-    }    
+    }  
+    
+    /*@GetMapping("/findByInitial")
+    public List<T2Student> findByInitial() {
+        return this.studentService.findByInitial();
+    }*/
     
 }

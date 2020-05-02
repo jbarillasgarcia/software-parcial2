@@ -52,4 +52,8 @@ public class StudentService {
         this.studentRepo.deleteById(id);
     }
     
+    
+    /*public List<T2Student> findByInitial() {
+        return (List<T2Student>) this.studentRepo.findAll();
+    }*/
 }
