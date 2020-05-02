@@ -1,6 +1,9 @@
 
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.service;
 
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.Cuo2Exeption.DosentAnypercent;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.Cuo2Exeption.ManyRows;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.Cuo2Exeption.StudentNameNotFound;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.Cuo2Repository;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.Cuo2RepositoryExport;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
@@ -22,10 +25,20 @@ public class Cuo2ServiceExport implements Cuo2RepositoryExport {
    private Cuo2Repository Cuo2Repo;
 
     @Override
-    public ByteArrayInputStream exportData(String name) throws Exception {
+    public ByteArrayInputStream exportData(String name) throws Exception ,StudentNameNotFound, DosentAnypercent, ManyRows {
         
         System.out.println(this.Cuo2Repo.countByName(name));
         
+        List<T2Student> students = this.Cuo2Repo.findStudentsWithPartOfName(name);
+       
+        if(name.indexOf("%")==-1 ){
+              throw new DosentAnypercent();
+        }else if(this.Cuo2Repo.countByName(name)==0){   
+             throw new StudentNameNotFound();
+        }else if(this.Cuo2Repo.countByName(name)>=10000){
+            throw new ManyRows();
+        }    
+            
         String[] columns ={"idStudent","name","surname","email","birthdate","studentId","phone1","phone2","address1","address2"};
       Workbook workbook = new HSSFWorkbook();
       ByteArrayOutputStream stream = new ByteArrayOutputStream(); 
@@ -38,7 +51,6 @@ public class Cuo2ServiceExport implements Cuo2RepositoryExport {
          cell.setCellValue(columns[i]);
       }
       
-      List<T2Student> students = this.Cuo2Repo.findStudentsWithPartOfName(name);
       int initRow =1;
       for(T2Student student : students ){
       row = sheet.createRow(initRow);
@@ -62,7 +74,7 @@ public class Cuo2ServiceExport implements Cuo2RepositoryExport {
     
     return new ByteArrayInputStream(stream.toByteArray());
         
-        
+          
     }
 
     @Override
