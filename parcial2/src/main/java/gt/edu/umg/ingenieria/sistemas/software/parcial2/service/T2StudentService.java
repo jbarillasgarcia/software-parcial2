@@ -5,23 +5,37 @@
  */
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.service;
 
-import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.T2StudentRepository;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.T2StudentRepository;
 
 /**
  *
- * @author rodrigo
+ * @author Josué Pivaral, Oscar Aleman
  */
-
-@Transactional
 @Service
 public class T2StudentService {
     
-    @Autowired
-    private T2StudentRepository studentRepo;
-
+   @Autowired
+   private T2StudentRepository studentRepository; 
+   @Autowired
+   private T2StudentRepository studentRepo;
+    
+   public List<T2Student> getStudentPerPages(int numeroPagina,int registrosPorPagina,
+                                             String campo, String direccion){
+           
+      return this.studentRepository.getStudentPerPages(numeroPagina,registrosPorPagina,
+                                                        campo,direccion);
+  }
+   
+   public List<T2Student> getStudentPerPage(){
+          
+      return this.studentRepository.getStudents();
+  }
+  
+   
     public String deleteLimitStoredProcedure(String tableName, String fildCon, String fildVal, String orden, int limitVal) { 
        return this.studentRepo.deleteLimitStoredProcedure(tableName, fildCon, fildVal, orden, limitVal);
     }
