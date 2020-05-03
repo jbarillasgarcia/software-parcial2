@@ -20,6 +20,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,6 +38,8 @@ import javax.validation.constraints.Size;
 @Table(name = "t2_student")
 @NamedQueries({
     @NamedQuery(name = "T2Student.findAll", query = "SELECT t FROM T2Student t")})
+
+
 public class T2Student implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -84,7 +90,7 @@ public class T2Student implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "address2")
     private String address2;
-     @JsonIgnore
+    @JsonIgnore
     @JoinTable(name = "t2_student_rel_course", joinColumns = {
         @JoinColumn(name = "id_student", referencedColumnName = "id_student")}, inverseJoinColumns = {
         @JoinColumn(name = "id_course", referencedColumnName = "id_course")})
