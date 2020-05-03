@@ -1,5 +1,4 @@
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.controller;
-
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
 import java.util.List;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.service.T2StudentService;
@@ -31,8 +30,6 @@ public class T2StudentController {
                        @RequestParam(name = "limit") Integer limitVal){
         return this.studentServ.deleteLimitStoredProcedure(tableName, fildCond, fildVal, orden, limitVal);
     }
-    
-    
     
     @GetMapping("student/lazyLoad")
     public List<T2Student> handle1(@RequestParam(name = "page") int page,
