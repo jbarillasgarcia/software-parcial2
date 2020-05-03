@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gt.edu.umg.ingenieria.sistemas.software.parcial2.services;
+package gt.edu.umg.ingenieria.sistemas.software.parcial2.service;
 
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
 import java.util.List;

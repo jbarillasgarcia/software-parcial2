@@ -1,7 +1,7 @@
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.controller;
 
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
-import gt.edu.umg.ingenieria.sistemas.software.parcial2.services.T2StudentServiceP;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.service.T2StudentServiceP;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
