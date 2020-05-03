@@ -6,6 +6,8 @@
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.service;
 
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.StudentExcep.FileExceedsSize;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.StudentExcep.NoRowsFound;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.StudentExcep.RowsWithError;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.StudentRepository;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
 import java.io.File;
@@ -32,10 +34,13 @@ public class StudentService {
     @Autowired
     private StudentRepository strepo;
     
-    public void insertFromExcelFile(MultipartFile excelFile) throws Exception, FileExceedsSize
+    public String insertFromExcelFile(MultipartFile excelFile) throws Exception, FileExceedsSize, NoRowsFound, RowsWithError
     {   
         String log[] = new String[9];
         int cont = 0;
+        int cont2 = 0; 
+        int numRow = 0;
+        int rowWE = 0;
         
         if(excelFile.getSize() > 4000000)
         {
@@ -49,8 +54,10 @@ public class StudentService {
             XSSFSheet s = ws.getSheetAt(0);
             //get all rows from file
             Iterator<Row> rI = s.iterator();
-            
+      
             Row row;
+            numRow = s.getLastRowNum()+1;
+            
                 while(rI.hasNext())
                 {
                     row = rI.next();
@@ -61,9 +68,19 @@ public class StudentService {
                         {
                             cell = cI.next();
                             switch(cell.getCellType())
-                            {
+                            { 
+                                case BLANK:
+                                    rowWE = cell.getRowIndex()+1;
+                                break;
+                                
+                                case FORMULA:
+                                    rowWE = cell.getRowIndex()+1;
+                                break;
+                                
                                 case NUMERIC: 
-                                    System.out.println("N"+cell.getNumericCellValue());
+                                    //System.out.println("N"+cell.getNumericCellValue());
+                                    log[cont] = cell.getStringCellValue();
+                                    cont++;
                                 break; 
                                 
                                 case STRING:
@@ -75,15 +92,26 @@ public class StudentService {
                         }
                       this.strepo.save(getT2St(log));
                       cont = 0;
+                      cont2++;
                       //System.out.println("\n");
                 }
-        file.close();
+                file.close();
         } catch(Exception e) {
-            e.printStackTrace();
+                                 e.printStackTrace();
                              }
-    
+        
+        if(numRow <= 0)
+        {
+            throw new NoRowsFound();
+        }
+        
+        if(rowWE > 0)
+        {
+            throw new RowsWithError(rowWE);
+        }
+        
+        return "Se han insertado "+cont2+" registros con exito ";
     }
-    
     
     //--------------------------------FUNCTIIONS To 1.
     private static File convert(MultipartFile file) throws IOException {
