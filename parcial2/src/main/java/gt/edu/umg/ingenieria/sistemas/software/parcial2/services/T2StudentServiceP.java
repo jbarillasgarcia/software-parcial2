@@ -5,22 +5,22 @@
  */
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.services;
 
-import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.T2StudentRepository;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.T2StudentRepositoryP;
 
 /**
  *
  * @author Josué Pivaral
  */
 @Service
-public class T2StudentService {
+public class T2StudentServiceP {
     
    @Autowired
-   private T2StudentRepository studentRepository; 
+   private T2StudentRepositoryP studentRepository; 
     
    public List<T2Student> getStudentPerPages(int numeroPagina,int registrosPorPagina,
                                              String campo, String direccion){

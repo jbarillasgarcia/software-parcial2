@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author Josué Pivaral
  */
 @Repository
-public interface T2StudentRepository extends CrudRepository<T2Student, Integer>{
+public interface T2StudentRepositoryP extends CrudRepository<T2Student, Integer>{
    
     @Query(value = "call sp_consult_students_pages(:numeroPagina,:registrosPorPagina,"
                                           + ":campo,:direccion);",nativeQuery = true)   
