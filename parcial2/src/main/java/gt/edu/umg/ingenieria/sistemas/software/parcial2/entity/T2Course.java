@@ -28,6 +28,7 @@ import javax.validation.constraints.Size;
 @Table(name = "t2_course")
 @NamedQueries({
     @NamedQuery(name = "T2Course.findAll", query = "SELECT t FROM T2Course t")})
+
 public class T2Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
