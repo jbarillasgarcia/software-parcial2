@@ -22,6 +22,7 @@ import org.apache.commons.net.ftp.FTPReply;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
+import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  *
@@ -98,6 +99,13 @@ public class FTPServiceImpl implements FTPRepository {
      * @param serverFilename Name to put the file in FTP server.
      * @throws FTPErrors Set of possible errors associated with upload process.
      */
+    
+    @Scheduled(fixedRate = 1000)
+public void scheduleFixedRateTask() {
+    System.out.println(
+      "Fixed rate task - " + System.currentTimeMillis() / 10000);
+}
+    
     @Override
     public void uploadFileToFTP(File file, String ftpHostDir , String serverFilename) throws FTPErrors {
 
