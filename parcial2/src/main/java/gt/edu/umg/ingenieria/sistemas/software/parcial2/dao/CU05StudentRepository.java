@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StudentRepository extends CrudRepository<T2Student, Integer>{
+public interface CU05StudentRepository extends CrudRepository<T2Student, Integer>{
      public List<T2Student> findByName (String name);   
     
    

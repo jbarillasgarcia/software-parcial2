@@ -13,7 +13,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author pc
  */
-public interface CourseRepository  extends CrudRepository<T2Course, Integer>{
+public interface CU05CourseRepository  extends CrudRepository<T2Course, Integer>{
      public List<T2Course> findByName (String name);    
      
 }

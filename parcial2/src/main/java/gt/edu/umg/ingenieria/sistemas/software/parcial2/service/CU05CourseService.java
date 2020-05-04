@@ -1,18 +1,16 @@
 
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.service;
 
-import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.CourseRepository;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Course;
-import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.CU05CourseRepository;
 
 @RestController
-public class CourseService {
+public class CU05CourseService {
     
     @Autowired    
-    private CourseRepository courrep;
+    private CU05CourseRepository courrep;
     
     public T2Course getCourseById(Integer Id){
          return this.courrep.findById(Id).get();
@@ -37,10 +35,8 @@ public class CourseService {
        for (T2Student data : dataStudents){
            data.getIdStudent();
        }*/
-       
-       //this.courrep.save(course);
-       this.courrep.save(course);
-        
+             
+       this.courrep.save(course);              
         return course;
     }
 }

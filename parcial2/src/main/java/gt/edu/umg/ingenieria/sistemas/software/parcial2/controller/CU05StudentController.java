@@ -1,35 +1,27 @@
 
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.controller;
 
-import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.CourseRepository;
-import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.StudentRepository;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Course;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
-import gt.edu.umg.ingenieria.sistemas.software.parcial2.service.CourseService;
-import gt.edu.umg.ingenieria.sistemas.software.parcial2.service.StudentService;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.service.CU05CourseService;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.service.CU05StudentService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-public class StudentController {
+public class CU05StudentController {
     
    @Autowired
-   public StudentService studentService;
+   public CU05StudentService studentService;
    
    @Autowired
-   public CourseService courseService;
-   
-   @Autowired
-    private StudentRepository studrepo;
-   
-   @Autowired   
-    private CourseRepository courrep;
+   public CU05CourseService courseService;    
     
     @GetMapping("/findv")
     public List<T2Student> geteEstu(){
@@ -42,22 +34,14 @@ public class StudentController {
     }
     
     @GetMapping("/estudiantePorNombre")
-     public T2Student getEstudianteByName(@RequestParam String nombre){
+     public List<T2Student> getEstudianteByName(@RequestParam String nombre){
        return this.studentService.getEstudianteByName(nombre);
     }
      
      @GetMapping("/cursoePorNombre")
      public T2Course getCursoByName(@RequestParam String nombre){
        return this.courseService.getCourseByName(nombre);
-    }
-     
-   /*  @PostMapping("/usuarios/{idUsuario}/permisos")
-   public Usuario addPermisoUsuario(@PathVariable(value = "idUsuario") Integer userId, @RequestBody Permiso permiso) {
-       Usuario user = userRepository.findOne(userId);
-       Permiso permisoExistente = permisoRepository.findOne(permiso.getIdPermiso());
-       user.getPermisoCollection().add(permisoExistente);
-       return userRepository.save(user);
- */
+    }       
 
      @PostMapping("/insertar")
     public T2Course insertar(@RequestParam int alumno, int curso){
@@ -86,12 +70,9 @@ public class StudentController {
         }
         
         // Al curso le agregamos el estudiante
-        newCourse.getT2StudentList().add(theStudent);
+        newCourse.getT2StudentList().add(theStudent);     
         
         // Guardamos el curso
-        return this.courseService.saveCourse(newCourse);                             
-          
-    }     
-     
-   
+        return this.courseService.saveCourse(newCourse);                                                                            
+    }      
 }
