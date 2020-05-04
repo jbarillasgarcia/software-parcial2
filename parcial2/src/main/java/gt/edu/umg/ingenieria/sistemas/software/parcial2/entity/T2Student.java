@@ -221,5 +221,9 @@ public class T2Student implements Serializable {
     public String toString() {
         return "gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student[ idStudent=" + idStudent + " ]";
     }
+
+    public void getNombre() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
