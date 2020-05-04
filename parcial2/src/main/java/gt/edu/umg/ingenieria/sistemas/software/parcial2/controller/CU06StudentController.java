@@ -25,11 +25,6 @@ public class CU06StudentController {
    @Autowired
    public CU06CourseService courseService;
    
-   @Autowired
-    private CU06StudentRepository studrepo;
-   
-   @Autowired   
-    private CU06CourseRepository courrep;
     
     @GetMapping("/findv")
     public List<T2Student> geteEstu(){
@@ -86,11 +81,17 @@ public class CU06StudentController {
         }
         
         // Al curso le agregamos el estudiante
-        newCourse.getT2StudentList().remove(theStudent);
+        newCourse.getT2StudentList().add(theStudent);
         // Guardamos el curso
         return this.courseService.saveCourse(newCourse);                             
           
     }     
-     
+     @DeleteMapping("/DeleteAssign")
+     public String delete(@RequestParam(name="student")int id,
+                          @RequestParam(name="course")int id2){
+         return this.courseService.deleteByAssign(id, id2);
+
+     }
+             
    
 }

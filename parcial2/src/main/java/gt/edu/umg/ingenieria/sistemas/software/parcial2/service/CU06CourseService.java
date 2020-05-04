@@ -7,8 +7,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.CU06CourseRepository;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.CU06StudentRepository;
+import javax.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Service;
 
-@RestController
+@Transactional
+@Service
 public class CU06CourseService {
     
     @Autowired    
@@ -30,4 +37,10 @@ public class CU06CourseService {
         
         return course;
     }
+      
+    public String deleteByAssign(int id,int id2) {
+       return this.courrep.deleteByAssign(id, id2);
+    }
+    
 }
+    
