@@ -9,6 +9,8 @@ import gt.edu.umg.ingenieria.sistemas.software.parcial2.dao.Cuo2RepositoryExport
 import gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Student;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -41,7 +43,14 @@ public class Cuo2ServiceExport implements Cuo2RepositoryExport {
             
         String[] columns ={"idStudent","name","surname","email","birthdate","studentId","phone1","phone2","address1","address2"};
       Workbook workbook = new HSSFWorkbook();
-      ByteArrayOutputStream stream = new ByteArrayOutputStream(); 
+      //ByteArrayOutputStream stream = new ByteArrayOutputStream(); 
+      
+      ByteArrayOutputStream stream = getByteStreamMethod();
+try(OutputStream outputStream = new FileOutputStream("thefilename")) {
+    stream.writeTo(outputStream);
+}
+      
+      
       
       Sheet sheet = workbook.createSheet("Student");
       Row row = sheet.createRow(0);
@@ -94,6 +103,10 @@ public class Cuo2ServiceExport implements Cuo2RepositoryExport {
 
     @Override
     public List<T2Student> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private ByteArrayOutputStream getByteStreamMethod() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

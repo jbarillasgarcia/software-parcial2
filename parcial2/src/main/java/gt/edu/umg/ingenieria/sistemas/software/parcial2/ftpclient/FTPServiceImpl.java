@@ -1,7 +1,7 @@
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.ftpclient;
 
-import cu.yoandypv.ftp.exceptions.ErrorMessage;
-import cu.yoandypv.ftp.exceptions.FTPErrors;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.ftpexceptions.ErrorMessage;
+import gt.edu.umg.ingenieria.sistemas.software.parcial2.ftpexceptions.FTPErrors;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -32,7 +32,7 @@ public class FTPServiceImpl implements FTPService {
      * @throws FTPErrors Set of possible errors associated with connection process.
      */
     @Override
-    public void connectToFTP(String host, String user, String pass) throws FTPErrors {
+    public void connectToFTP(String host, String user, String pass)  {
 
         ftpconnection = new FTPClient();
         ftpconnection.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
@@ -43,7 +43,7 @@ public class FTPServiceImpl implements FTPService {
         } catch (IOException e) {
             ErrorMessage errorMessage = new ErrorMessage(-1, "No fue posible conectarse al FTP a través del host=" + host);
             logger.error(errorMessage.toString());
-            throw new FTPErrors(errorMessage);
+            //throw new FTPErrors(errorMessage);
         }
 
         reply = ftpconnection.getReplyCode();
@@ -55,7 +55,7 @@ public class FTPServiceImpl implements FTPService {
             } catch (IOException e) {
                 ErrorMessage errorMessage = new ErrorMessage(-2, "No fue posible conectarse al FTP, el host=" + host + " entregó la respuesta=" + reply);
                 logger.error(errorMessage.toString());
-                throw new FTPErrors(errorMessage);
+                //throw new FTPErrors(errorMessage);
             }
         }
 
@@ -64,7 +64,7 @@ public class FTPServiceImpl implements FTPService {
         } catch (IOException e) {
             ErrorMessage errorMessage = new ErrorMessage(-3, "El usuario=" + user + ", y el pass=**** no fueron válidos para la autenticación.");
             logger.error(errorMessage.toString());
-            throw new FTPErrors(errorMessage);
+            //throw new FTPErrors(errorMessage);
         }
 
         try {
@@ -72,7 +72,7 @@ public class FTPServiceImpl implements FTPService {
         } catch (IOException e) {
             ErrorMessage errorMessage = new ErrorMessage(-4, "El tipo de dato para la transferencia no es válido.");
             logger.error(errorMessage.toString());
-            throw new FTPErrors(errorMessage);
+            //throw new FTPErrors(errorMessage);
         }
 
         ftpconnection.enterLocalPassiveMode();
@@ -86,7 +86,7 @@ public class FTPServiceImpl implements FTPService {
      * @throws FTPErrors Set of possible errors associated with upload process.
      */
     @Override
-    public void uploadFileToFTP(File file, String ftpHostDir , String serverFilename) throws FTPErrors {
+    public void uploadFileToFTP(File file, String ftpHostDir , String serverFilename) {
 
         try {
             InputStream input = new FileInputStream(file);
@@ -94,7 +94,7 @@ public class FTPServiceImpl implements FTPService {
         } catch (IOException e) {
             ErrorMessage errorMessage = new ErrorMessage(-5, "No se pudo subir el archivo al servidor.");
             logger.error(errorMessage.toString());
-            throw new FTPErrors(errorMessage);
+            //throw new FTPErrors(errorMessage);
         }
 
     }
@@ -107,15 +107,15 @@ public class FTPServiceImpl implements FTPService {
      */
 
     @Override
-    public void downloadFileFromFTP(String ftpRelativePath, String copytoPath) throws FTPErrors {
+    public void downloadFileFromFTP(String ftpRelativePath, String copytoPath)  {
 
-        FileOutputStream fos;
+        FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(copytoPath);
         } catch (FileNotFoundException e) {
             ErrorMessage errorMessage = new ErrorMessage(-6, "No se pudo obtener la referencia a la carpeta relativa donde guardar, verifique la ruta y los permisos.");
             logger.error(errorMessage.toString());
-            throw new FTPErrors(errorMessage);
+            //throw new FTPErrors(errorMessage);
         }
 
         try {
@@ -123,7 +123,7 @@ public class FTPServiceImpl implements FTPService {
         } catch (IOException e) {
             ErrorMessage errorMessage = new ErrorMessage(-7, "No se pudo descargar el archivo.");
             logger.error(errorMessage.toString());
-            throw new FTPErrors(errorMessage);
+            //throw new FTPErrors(errorMessage);
         }
     }
 
@@ -132,13 +132,13 @@ public class FTPServiceImpl implements FTPService {
      * @throws FTPErrors Error if unplugged process failed.
      */
     @Override
-    public void disconnectFTP() throws FTPErrors {
+    public void disconnectFTP()  {
         if (this.ftpconnection.isConnected()) {
             try {
                 this.ftpconnection.logout();
                 this.ftpconnection.disconnect();
             } catch (IOException f) {
-               throw new FTPErrors( new ErrorMessage(-8, "Ha ocurrido un error al realizar la desconexión del servidor FTP"));
+               //throw new FTPErrors( new ErrorMessage(-8, "Ha ocurrido un error al realizar la desconexión del servidor FTP"));
             }
         }
     }
