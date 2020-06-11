@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gt.edu.umg.ingenieria.sistemas.software.parcial2.entity;
 
 import java.io.Serializable;
@@ -15,10 +20,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ *
+ * @author pc
+ */
 @Entity
 @Table(name = "t2_course")
 @NamedQueries({
     @NamedQuery(name = "T2Course.findAll", query = "SELECT t FROM T2Course t")})
+
 public class T2Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -109,5 +119,5 @@ public class T2Course implements Serializable {
     public String toString() {
         return "gt.edu.umg.ingenieria.sistemas.software.parcial2.entity.T2Course[ idCourse=" + idCourse + " ]";
     }
-
+    
 }
